@@ -1,0 +1,2 @@
+# The stylesheets are front-end assets; classify this Flask/ML project by its source code.
+static/**/*.css linguist-detectable=false
