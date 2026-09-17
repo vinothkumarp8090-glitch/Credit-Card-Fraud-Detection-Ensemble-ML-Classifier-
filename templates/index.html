@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection | Secure Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --bg: #f8f9fd;
+            --card: #ffffff;
+            --text: #2b2d42;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .ml-container {
+            background: var(--card);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .heading_font {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .form-section-title {
+            grid-column: 1 / -1;
+            margin: 20px 0 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6c757d;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 5px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        input, select {
+            padding: 12px 15px;
+            border: 2px solid #edf2f7;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+        }
+
+        #sub {
+            grid-column: 1 / -1;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: transform 0.2s, background 0.3s;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        #sub:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        #sub:active {
+            transform: translateY(0);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ml-container">
+        <div class="header">
+            <h2 class="container-heading"><span class="heading_font"><i class="fas fa-shield-halved"></i> Fraud Detection</span></h2>
+            <p>Enter transaction details to analyze risk patterns</p>
+        </div>
+
+        <form action="{{ url_for('predict') }}" method="POST">
+            <div class="grid-layout">
+                <div class="form-section-title">Client Demographics</div>
+                
+                <div class="input-group">
+                    <label>Client ID</label>
+                    <input type="text" name="ID" placeholder="e.g. 1001" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Credit Limit (LIMIT_BAL)</label>
+                    <input type="number" name="LIMIT_BAL" placeholder="Limit in NT$" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Sex (1=M, 2=F)</label>
+                    <input type="number" name="SEX" placeholder="1 or 2" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Education (1-4)</label>
+                    <input type="number" name="EDUCATION" placeholder="1: Grad, 2: Univ..." required>
+                </div>
+
+                <div class="input-group">
+                    <label>Marriage (1-3)</label>
+                    <input type="number" name="MARRIAGE" placeholder="1: Married, 2: Single..." required>
+                </div>
+
+                <div class="input-group">
+                    <label>Age</label>
+                    <input type="number" name="AGE" placeholder="Years" required>
+                </div>
+
+                <div class="form-section-title">Repayment Status (PAY_0 to PAY_6)</div>
+                <div class="input-group"><label>PAY_0</label><input type="number" name="PAY_0" required></div>
+                <div class="input-group"><label>PAY_2</label><input type="number" name="PAY_2" required></div>
+                <div class="input-group"><label>PAY_3</label><input type="number" name="PAY_3" required></div>
+                <div class="input-group"><label>PAY_4</label><input type="number" name="PAY_4" required></div>
+                <div class="input-group"><label>PAY_5</label><input type="number" name="PAY_5" required></div>
+                <div class="input-group"><label>PAY_6</label><input type="number" name="PAY_6" required></div>
+
+                <div class="form-section-title">Statement Amounts (BILL_AMT)</div>
+                <div class="input-group"><label>BILL_AMT1</label><input type="number" name="BILL_AMT1" required></div>
+                <div class="input-group"><label>BILL_AMT2</label><input type="number" name="BILL_AMT2" required></div>
+                <div class="input-group"><label>BILL_AMT3</label><input type="number" name="BILL_AMT3" required></div>
+                <div class="input-group"><label>BILL_AMT4</label><input type="number" name="BILL_AMT4" required></div>
+                <div class="input-group"><label>BILL_AMT5</label><input type="number" name="BILL_AMT5" required></div>
+                <div class="input-group"><label>BILL_AMT6</label><input type="number" name="BILL_AMT6" required></div>
+
+                <button id="sub" type="submit">Analyze Transaction</button>
+            </div>
+        </form>
+        
+        <div class="footer-note">
+            Secure ML Prediction Engine &copy; 2026
+        </div>
+    </div>
+
+</body>
+</html>

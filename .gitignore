@@ -1,0 +1,13 @@
+# Local Python environments and generated Python files
+myvenv/
+venv/
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+*.py[cod]
+
+# Trained model artifacts (too large for a standard GitHub repository)
+*.pkl
+
+# Local application data
+*.db

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Create Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --error-bg: #fee2e2;
+            --error-text: #b91c1c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            padding: 20px;
+        }
+
+        #user-form {
+            background: #ffffff;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+        }
+
+        .form-item {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Error Message Styles */
+        #error-msg {
+            background: var(--error-bg);
+            color: var(--error-text);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid #fecaca;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Submit Button */
+        #form-submit {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        #form-submit:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        /* Switch Form Link */
+        #switch-form {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .text-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="user-form" action="/register" method="post">
+        <h2>Join Us</h2>
+        <p class="subtitle">Create your account to get started</p>
+
+        {% if error %}
+            <p id="error-msg"><i class="fas fa-exclamation-circle"></i> {{error}}</p>
+        {% endif %}
+
+        <div class="form-item">
+            <label for="register-username">Username</label>
+            <input id="register-username" class="form-input" type="text" name="username" placeholder="Choose a unique username" required>
+        </div>
+
+        <div class="form-item">
+            <label for="register-email">Email Address</label>
+            <input id="register-email" class="form-input" type="email" name="email" placeholder="name@example.com" required>
+        </div>
+
+        <div class="form-item">
+            <label for="register-password">Password</label>
+            <input id="register-password" class="form-input" type="password" name="password" placeholder="At least 8 characters" required>
+        </div>
+
+        <div class="form-item">
+            <label for="register-confirm-password">Confirm Password</label>
+            <input id="register-confirm-password" class="form-input" type="password" name="confirm-password" placeholder="Repeat your password" required>
+        </div>
+
+        <input id="form-submit" type="submit" value="Create Account">
+
+        <div id="switch-form">
+            <p>Already have an account? <a class="text-link" href="/login">Login here</a></p>
+        </div>
+    </form>
+
+</body>
+</html>
