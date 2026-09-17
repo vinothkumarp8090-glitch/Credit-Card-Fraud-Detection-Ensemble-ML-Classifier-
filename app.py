@@ -1,6 +1,7 @@
 import sqlite3
 import contextlib
 import re
+import os
 import numpy as np
 import pickle
 from argon2 import PasswordHasher
@@ -18,7 +19,7 @@ app = Flask(__name__)
 
 model=pickle.load(open('credit_model.pkl','rb'))
 
-app.secret_key = 'xpSm7p5bgJY8rNoBjGWiz5yjxM-NEBlW6SIBI62OkLc='
+app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
 database = "users.db"
 setup_database(name=database)
